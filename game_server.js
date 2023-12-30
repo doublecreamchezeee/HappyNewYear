@@ -28,7 +28,7 @@ const maxAge = 60 * 60 * 1000;
 //     })
 // );
 
-const route = require('./auth_server_routes/router');
+const route = require('./server_routes/router');
 const handlebars = require('./configs/hdb-config');
 
 handlebars(app);

@@ -21,9 +21,10 @@ class AuthorizationController {
 
             if (jwtH.isExpired(req.cookies['accessToken'], process.env.ACCESS_TOKEN_SECRET)) {
                 console.log('Access2: ', jwtH.isExpired(req.cookies['accessToken'], process.env.ACCESS_TOKEN_SECRET));
-                const account = await accountModel.getAccount(req.cookies.username);
-                const refreshToken = account.Token;
-                const username = account.Username;
+                const account = await users.getAccount(req.cookies.username);
+                const refreshToken = account.token;
+                const username = account.username;
+                console.log(account);
                 if (jwtH.isExpired(refreshToken, process.env.REFRESH_TOKEN_SECRET)) {
                     res.redirect(`${AUTH_SERVER_URL}/authorization/signin?callbackURL=${CALLBACK_URL}`,);
                     return;
@@ -40,7 +41,7 @@ class AuthorizationController {
                     }),
                 });
                 const tokens = await response.json();
-                await accountModel.updateRefreshToken(username, tokens.refreshToken);
+                await users.updateRefreshToken(username, tokens.refreshToken);
                 res.cookie("accessToken", tokens.accessToken);
                 res.cookie("username", username);
             }
@@ -168,7 +169,7 @@ class AuthorizationController {
     async signOut(req, res, next) {
         try {
             const username = req.params.username;
-            await accountModel.updateRefreshToken(username, null);
+            await users.updateRefreshToken(username, null);
             res.clearCookie('accessToken');
             res.clearCookie('username');
             res.redirect('/');
