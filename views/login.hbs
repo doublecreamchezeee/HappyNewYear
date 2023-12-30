@@ -5,15 +5,29 @@
         Login
     </div>
     <form class="p-3 mt-3" action="/authorization/signin" method="POST"
-        id="form-login">
+        id="form-login" value="{{callbackURL}}" name="callbackURL">
         <div class="form-group">
             <input type="text" class="form-control m-3" id="username"
-                placeholder="Username">
+                placeholder="Username" name="username">
         </div>
         <div class="form-group">
             <input type="password" class="form-control m-3"
-                id="password" placeholder="Password">
+                id="password" placeholder="Password" name="password">
         </div>
+        <input type="hidden" name="callbackURL" value="{{callbackURL}}">
+        <div class="form-group input-group p-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <b>Expire:</b> </span>
+            </div>
+            <select class="form-control" name="expire">
+                <option selected name="5m">5m</option>
+                <option name="10m">10m</option>
+                <option name="15m">15m</option>
+                <option name="30m">30m</option>
+                <option name="1h">1h</option>
+            </select>
+            <div class="form-message"></div>
+        </div> 
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
     <div class="fs-6 text-black mt-3 text-center">

@@ -3,8 +3,8 @@ require('dotenv').config({
     path: './env'
 })
 const jwtH = require('../../helpers/jwt.h');
-// const bcrypt = require('bcrypt');
-// const users = require('../models/user.m');
+const bcrypt = require('bcrypt');
+const users = require('../models/user.m');
 const CALLBACK_URL = process.env.CALLBACK_URL;
 const AUTH_SERVER_URL = process.env.AUTH_SERVER_URL;
 
@@ -54,22 +54,53 @@ class AuthorizationController {
         res.render('login', {
             layout: 'auth',
             showHeader: true,
+            callbackURL: req.query.callbackURL,
         });
     }
 
-    login_post(req,res,next){
-        console.log('Login:');
+    async login_post(req,res,next){
+        console.log('Login:' , req.body);
+
         const username = req.body.username
         const password = req.body.password
+        const callbackURL = req.body.callbackURL
+        const expAccessToken = req.body.expire;
         console.log("un:", username)  
-        console.log("pw:" + password)
+        console.log("pw:", password)
+
+        try{
+            const account = await users.getAccount(username);
+            console.log('Account: ', account)
+            if (account === null){
+                console.log('Account has not existed');
+                return;
+            }
+            const checkPassword = await bcrypt.compare(password, account.password);
+            console.log('Checkpass', checkPassword);
+            if (!checkPassword){
+                console.log('Password is wrong');
+                res.redirect(`${AUTH_SERVER_URL}/authorization/signin?callbackURL=${CALLBACK_URL}`)
+                return;
+            }
+            
+            console.log('Login success')
+            const tokens = jwtH.generateTokens(username, expAccessToken);
+            await users.updateRefreshToken(username,tokens.refreshToken);
+            res.cookie("accessToken",tokens.accessToken);
+            res.cookie("username",username);
+            res.redirect(callbackURL);
+            
+            
+        } catch(error) {
+            next(error);
+        }
     }
 
     async register_post(req, res, next){
         // console.log(req.body);
-        let name = req.body.name
-        let username = req.body.username
-        let password = req.body.password
+        // let name = req.body.name
+        // let username = req.body.username
+        // let password = req.body.password
         // let isValid = true;
 
         // let regex = /^[A-Z][a-zA-Z]*$/
@@ -98,16 +129,16 @@ class AuthorizationController {
         // }
         try {
             console.log(req.body);
-            // const hashedPassword = await bcrypt.hash(req.body.password, 10);
-            // const user = {
-            //     email: req.body.email,
-            //     username: req.body.username,
-            //     password: hashedPassword,
-            //     name: req.body.name,
-            // }
-            // // const data = await Users.insert(user);
-            // res.json({email, username, password, name})
-            res.redirect('back');
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            const user = {
+                // avatar: req.body.avatar,
+                username: req.body.username,
+                password: hashedPassword,
+                name: req.body.name,
+            }
+            const data = await users.add(user);
+            // res.json({username, password, name})
+            res.redirect('/');
         }
         catch (e) {
             console.log(e)
