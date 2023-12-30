@@ -3,8 +3,7 @@ const https = require('https');
 const path = require('path');
 const fs = require('fs');
 const dotenv = require('dotenv');
-const cookieParser = require('cookie-parser');
-const passport = require('passport');
+// const passport = require('passport');
 
 dotenv.config({
     path: '.env'
@@ -12,30 +11,35 @@ dotenv.config({
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 const options = {
-    key: fs.readFileSync('./src/https/localhost-key.pem'),
-    cert: fs.readFileSync('./src/https/localhost.pem'),
+    key: fs.readFileSync('./https/localhost-key.pem'),
+    cert: fs.readFileSync('./https/localhost.pem'),
 };
 
 const route = require('./auth_server_routes/router');
 const handlebars = require('./configs/hdb-config');
 
 const app = express();
+app.use(express.json());
+// app.use("/public",express.static(path.join(__dirname, "public")))
+app.use(express.static(path.join(__dirname, './')));
+app.use(express.urlencoded({
+    extended: true
+}));
 const port = process.env['AUTH_SERVER_PORT'] || 3003;
-app.use(cookieParser());
+// app.use(cookieParser());
 
 handlebars(app);
 
 // public file
-app.use(express.static(path.join(__dirname, 'public')));
-// middleware
-app.use(express.urlencoded({
-    extended: true
-}));
-app.use(express.json());
 
-// Initialize Passport
-app.use(passport.initialize());
-app.use(passport.session());
+// middleware
+// const middleware = require('./middleware/mdw')
+// app.use(middleware.badRequest);
+// app.use(middleware.internalServer);
+
+// // Initialize Passport
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 route(app);
 
