@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
+const session = require('express-session');
 // const passport = require('passport');
 
 dotenv.config({

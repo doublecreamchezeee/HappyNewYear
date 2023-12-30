@@ -18,15 +18,15 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 app.use(cookieParser());
 const secret = process.env.SECRET_KEY;
 const maxAge = 60 * 60 * 1000;
-// app.use(cookieParser(secret))
-// app.use(
-//     session({
-//         secret: secret,
-//         resave: true,
-//         saveUninitialized: false,
-//         cookie: {maxAge: maxAge},
-//     })
-// );
+app.use(cookieParser(secret))
+app.use(
+    session({
+        secret: secret,
+        resave: true,
+        saveUninitialized: false,
+        cookie: {maxAge: maxAge},
+    })
+);
 
 const route = require('./server_routes/router');
 const handlebars = require('./configs/hdb-config');

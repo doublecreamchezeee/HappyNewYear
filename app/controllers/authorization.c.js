@@ -44,6 +44,7 @@ class AuthorizationController {
                 await users.updateRefreshToken(username, tokens.refreshToken);
                 res.cookie("accessToken", tokens.accessToken);
                 res.cookie("username", username);
+                // res.json(username);
             }
             res.redirect('/');
         } catch (err) {

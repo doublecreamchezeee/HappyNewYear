@@ -36,10 +36,13 @@
                 <div class="profile-user">
                     <!-- Add your profile-user content here -->
                 </div>
+                {{#if username}}
                 <a href="/user/signout" class="btn btn-danger btn-custom mt-1"><i class="fa-solid fa-right-from-bracket"></i>
                     Logout</a>
+                {{else}}
                 <a href="/authorization/" class="btn btn-success btn-custom mx-2"><i class="fa-solid fa-sign-in"></i>
                     SignIn</a>
+                {{/if}}
             </div>
         </div>
     </div>
