@@ -2,6 +2,7 @@ const express = require('express');
 const https = require('https');
 const path = require('path');
 const fs = require('fs');
+const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 // const passport = require('passport');
 
@@ -26,34 +27,34 @@ app.use(express.urlencoded({
     extended: true
 }));
 const port = process.env['AUTH_SERVER_PORT'] || 3003;
-// app.use(cookieParser());
+app.use(cookieParser());
 
 handlebars(app);
+route(app);
 
 // public file
 
 // middleware
-// const middleware = require('./middleware/mdw')
-// app.use(middleware.badRequest);
-// app.use(middleware.internalServer);
+const middleware = require('./middleware/mdw')
+app.use(middleware.badRequest);
+app.use(middleware.internalServer);
 
 // // Initialize Passport
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-route(app);
 
-app.use('*', (req, res, next) => {
-    const err = new Error('Page not found');
-    err.statusCode = 404;
-    next();
-});
+// app.use('*', (req, res, next) => {
+//     const err = new Error('Page not found');
+//     err.statusCode = 404;
+//     next();
+// });
 
-app.use((err, req, res, next) => {
-    const statusCode = err.statusCode || 500;
-    res.status(statusCode)
-        .send(statusCode + " " + err.message);
-});
+// app.use((err, req, res, next) => {
+//     const statusCode = err.statusCode || 500;
+//     res.status(statusCode)
+//         .send(statusCode + " " + err.message);
+// });
 
 https.createServer(options, app).listen(port, () => {
     console.log(`Example app listening on https://localhost:${port}`);

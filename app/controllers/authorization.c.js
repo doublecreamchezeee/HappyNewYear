@@ -107,6 +107,7 @@ class AuthorizationController {
             // }
             // // const data = await Users.insert(user);
             // res.json({email, username, password, name})
+            res.redirect('back');
         }
         catch (e) {
             console.log(e)

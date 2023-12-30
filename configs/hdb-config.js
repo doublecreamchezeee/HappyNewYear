@@ -6,7 +6,7 @@ function handlebars(app) {
         extname: "hbs",
         layoutsDir: path.join(__dirname, "../views", "layouts"),
         partialsDir: path.join(__dirname, "../views", "partials"),
-        defaultLayout: "auth",
+        defaultLayout: "game",
     }));
     app.set('view engine', 'hbs');
     app.set('views', path.join(__dirname, '../views'));

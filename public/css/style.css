@@ -114,3 +114,55 @@ a, p, li, ul, h1,h2, h3, h4, h5, span{
         transition: all .2s linear;
     }
 }
+
+/* Navbar */
+.gradient-custom {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-link div {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+}
+
+/* Profile */
+.profile {
+    text-align: end;
+}
+
+.btn-custom {
+    color: white;
+    background-color: #dc3545;
+    border: none;
+}
+
+/* FontAwesome Icons */
+.fa-house::before {
+    content: "\f015"; /* Unicode for the house icon */
+}
+
+.fa-gamepad::before {
+    content: "\f11b"; /* Unicode for the gamepad icon */
+}
+
+.fa-ranking-star::before {
+    content: "\f005"; /* Unicode for the ranking star icon */
+}
+
+.fa-right-from-bracket::before {
+    content: "\f355"; /* Unicode for the right-from-bracket icon */
+}
+
+/* Add more styles for other custom classes as needed */
