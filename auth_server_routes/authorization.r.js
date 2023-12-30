@@ -22,4 +22,6 @@ router.get('/signout/:username', controller.signOut);
 
 router.get('/', controller.request);
 
+router.post('/validate', controller.validate);
+
 module.exports = router

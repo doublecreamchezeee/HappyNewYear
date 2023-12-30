@@ -5,14 +5,22 @@
     "name": "Thanh Tri",
     "password": "$2b$10$S8aYvjfGl48Y7W1wiY.Ed.oTIYijpE1ME66Q80M6mmpOIqRyx71fe",
     "avatar": "",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtrayIsImlhdCI6MTcwMzk0MTI0OSwiZXhwIjoxNzAzOTQ4NDQ5fQ.2IZCngksV4DFBBL4x4eMbiZxOnq_2uETmIuTyk-0QjE"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtrayIsImlhdCI6MTcwMzk0OTgzMiwiZXhwIjoxNzAzOTU3MDMyfQ.ra0iwOYuNJMfWGt2K5mRlCYIIEcCI85k_92fuE9RPbE"
   },
   {
     "id": 2,
-    "username": "kkk",
+    "username": "boboca1508",
     "name": "Thanh Tri",
     "password": "$2b$10$UJjfEg9U0pHWSKomgZXLD.damidqAM4bwV5Fq37AsrkLGFvbVbSw6",
     "avatar": "",
     "token": ""
+  },
+  {
+    "id": 3,
+    "username": "meomeo",
+    "name": "hoho",
+    "password": "$2b$10$1ayBmraYQg.UtWQVeU7YyOgv5uPnaclFhWCLutUuI./g0FbVn2Gfy",
+    "avatar": "",
+    "token": null
   }
 ]

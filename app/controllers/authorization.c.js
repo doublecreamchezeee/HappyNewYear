@@ -173,13 +173,46 @@ class AuthorizationController {
             await users.updateRefreshToken(username, null);
             res.clearCookie('accessToken');
             res.clearCookie('username');
-            res.redirect('/');
+            res.redirect(CALLBACK_URL);
         } catch (error) {
             next(error)
         }
     }
 
+    async validate(req,res,next) {
+        // Replace this with your actual validation logic
+        const isValid = await validateFormData(req.body);
+        console.log('is valid signup data: ',isValid)
+        // Respond with a JSON object indicating the validation result
+        res.json({
+            isValid: isValid.isValid,
+            message: isValid.message
+        });
+    }
 
+
+
+}
+
+async function validateFormData(formData) {
+    const username = formData.username;
+    const password = formData.password;
+
+    // Check if the username and password are provided
+    if (!username || !password) {
+        return { isValid: false, message: 'Please provide both username and password.' };
+    }
+
+    // Find the user in the database
+    const user = await users.getAccount(username);
+    console.log(user)
+    // Check if the user exists
+    if (user !== null ) {
+        return { isValid: false, message: 'Invalid username.' };
+    }
+
+    // If everything is valid, return true
+    return { isValid: true, message: 'Validation successful' };
 }
 
 module.exports = new AuthorizationController();

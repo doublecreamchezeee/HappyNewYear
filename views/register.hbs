@@ -4,7 +4,7 @@
     <div class="text-center mt-4 name fs-4">
         Register
     </div>
-    <form class="p-3 mt-3" action="/authorization/signup" method="POST">
+    <form id="form-register" class="p-3 mt-3" action="/authorization/signup" method="POST">
         <div class="form-group m-3">
             <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
         </div>
@@ -22,3 +22,52 @@
 </div>
 {{> footer }}
 {{> script }}
+<script>
+$(document).ready(function () {
+    // Add a submit event listener to the registration form
+    $('#form-register').submit(function (event) {
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Perform AJAX validation
+        validateRegistrationForm();
+    });
+
+    // Function to perform AJAX validation for registration
+    function validateRegistrationForm() {
+        // Get the form data
+        var formData = $('#form-register').serialize();
+
+        // Perform the AJAX request to the registration endpoint
+        $.ajax({
+            type: 'POST',
+            url: '/authorization/validate', // Replace with your server-side registration endpoint
+            data: formData,
+            success: function (response) {
+                console.log("kakaakka")
+                // Handle the response from the server
+                handleRegistrationResponse(response);
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+    // Function to handle the registration response
+    function handleRegistrationResponse(response) {
+        console.log(response);
+        if (response.isValid) {
+            // If registration is successful, redirect or show a success message
+            // You can redirect the user to a different page or display a success message
+            // For example, you can use window.location.href = '/success';
+            
+            $('#form-register').unbind('submit').submit();
+
+        } else {
+            // If registration fails, display an error message or take appropriate action
+            $('.form-message').text(response.message);
+        }
+    }
+});
+</script>
