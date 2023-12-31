@@ -1,4 +1,5 @@
 require('dotenv').config({ path: '.env' });
+const bcrypt = require('bcrypt');
 const users = require('../models/user.m')
 class UserController {
     async renderProfile(req,res){
@@ -45,7 +46,8 @@ class UserController {
         console.log('Post update profile body', req.body);
         const { username, name, password } = req.body;
         if (username) {
-            await users.update(username, name, password);
+            const hashed = await bcrypt.hash(password, 10);
+            await users.update(username, name, hashed);
             res.redirect(`/user/profile`);
         } else {
             console.log('Error in postUpdateProfile');
