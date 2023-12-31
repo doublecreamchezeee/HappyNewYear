@@ -6,7 +6,6 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const fs = require('fs');
 const dotenv = require('dotenv');
 // const passport = require('passport');
 
@@ -40,14 +39,22 @@ app.use(express.urlencoded({
 
 const port = process.env['GAME_SERVER_PORT'] || 21575;
 
-route(app);
+const io = new Server(server,{
+  cors: {
+    origin: ['http://localhost:21575']
+  }
+})
+
+route(app,io);
 
 // require('./configs/passport-config')(app);
 
-// // middleware
-// const middleware = require('./middleware/mdw')
-// app.use(middleware.badRequest);
-// app.use(middleware.internalServer);
+// middleware
+const middleware = require('./middleware/mdw')
+app.use(middleware.badRequest);
+app.use(middleware.internalServer);
+
+
 
 
 

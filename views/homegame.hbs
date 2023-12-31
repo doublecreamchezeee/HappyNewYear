@@ -5,8 +5,7 @@
             <div class="container" style="height: 400px; overflow-y: scroll;">
                 <ul class="list-group" style="overflow-y: scroll;">
 
-                    <li class="list-group-item">username</li>
-                    <li class="list-group-item">username</li>
+                    <li class="list-group-item" id="username">{{username}}</li>
                     
 
                 </ul>
@@ -32,3 +31,24 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+    const client = io();
+    const username = $("#username").html()
+    client.emit('player-has-online', username);
+
+    client.on('update-player-online-list', (data) => {
+        let playerOnlineList = data.map((player) => {
+            return `<li class="clearfix">
+                    <img src="${player.avatar}" class="avatar">
+                    <div class="about">
+                        <div class="name">${player.nickname}</div>
+                        <div class="status online">Online</div>
+                    </div>
+                </li>`
+        });
+        $('#player-online-list').html(playerOnlineList.join(''));
+    });
+</script>

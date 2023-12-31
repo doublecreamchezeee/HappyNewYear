@@ -1,26 +1,36 @@
-[
-  {
-    "id": 1,
-    "username": "kkk",
-    "password": "********",
-    "avatar": "",
-    "token": null,
-    "name": "hihihiname"
-  },
-  {
-    "id": 2,
-    "username": "boboca1508",
-    "name": "Thanh Tri",
-    "password": "$2b$10$UJjfEg9U0pHWSKomgZXLD.damidqAM4bwV5Fq37AsrkLGFvbVbSw6",
-    "avatar": "",
-    "token": ""
-  },
-  {
-    "id": 3,
-    "username": "meomeo",
-    "name": "meoemo",
-    "password": "$2b$10$DFFLcchtHRvVo9.Bwv9K9OeQpqGbNMd32EyOHFXnkfKbPuTkkg5QS",
-    "avatar": "",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1lb21lbyIsImlhdCI6MTcwNDAxMTU2OCwiZXhwIjoxNzA0MDE4NzY4fQ.122npd2ca6YJbxwr5Hq13baDABPYY-eSzciEW5tx5QQ"
-  }
-]
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "kkk",
+      "password": "********",
+      "avatar": "",
+      "token": null,
+      "name": "hihihiname"
+    },
+    {
+      "id": 2,
+      "username": "boboca1508",
+      "name": "Thanh Tri",
+      "password": "$2b$10$UJjfEg9U0pHWSKomgZXLD.damidqAM4bwV5Fq37AsrkLGFvbVbSw6",
+      "avatar": "",
+      "token": ""
+    },
+    {
+      "id": 3,
+      "username": "meomeo",
+      "name": "meoemo",
+      "password": "$2b$10$DFFLcchtHRvVo9.Bwv9K9OeQpqGbNMd32EyOHFXnkfKbPuTkkg5QS",
+      "avatar": "",
+      "token": null
+    },
+    {
+      "id": 4,
+      "username": "hihi",
+      "name": "hihi",
+      "password": "$2b$10$xH5Ig2bJPrJzFF65oUFqKuthz3UJ9NNMS1pF6gDBKe5Dzi02vNxFe",
+      "avatar": "",
+      "token": null
+    }
+  ]
+}
