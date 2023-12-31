@@ -8,7 +8,6 @@ function route(app) {
     app.use('/user',userRouter);
     app.use('/authorization',authorizationRouter)
     app.use('/create',createRouter)
-
 }
 
 module.exports = route;

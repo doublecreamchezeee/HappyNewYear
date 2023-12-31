@@ -26,7 +26,22 @@ module.exports = {
             console.log(error);
             throw error;
         }
-    }, 
+    },
+    update: async function (un, name, password) {
+        try {
+            const users = require(usersFilePath);
+            const user = await users.find(user => user.username === un);
+            // TO DO: THÊM CHECK TOKEN PERMISSION
+            if (user) {
+                user.username = un;
+                user.name = name;
+                user.password = password;
+                fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
     getAccount: async (username) => {
         try {
             const users = require(usersFilePath);

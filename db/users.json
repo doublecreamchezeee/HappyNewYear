@@ -2,10 +2,10 @@
   {
     "id": 1,
     "username": "kkk",
-    "name": "Thanh Tri",
-    "password": "$2b$10$S8aYvjfGl48Y7W1wiY.Ed.oTIYijpE1ME66Q80M6mmpOIqRyx71fe",
+    "password": "********",
     "avatar": "",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtrayIsImlhdCI6MTcwMzk0OTgzMiwiZXhwIjoxNzAzOTU3MDMyfQ.ra0iwOYuNJMfWGt2K5mRlCYIIEcCI85k_92fuE9RPbE"
+    "token": null,
+    "name": "hihihiname"
   },
   {
     "id": 2,
